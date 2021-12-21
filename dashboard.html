@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class = "container">
+        <nav class="h2 navbar navbar-dark bg-dark p-2 space-between">
+            <a class="brand text-decoration-none text-light" href="/dashboard">
+                Right Route
+            </a>
+            <a class="view_profile text-decoration-none text-light" href="/view_profile/{{ user.id }}">
+                {{ user.first_name }}'s Profile
+            </a>
+            <a class="logout text-decoration-none text-light" href="/logout">
+                Logout
+            </a>
+        </nav>
+        <div class = "row">
+                <div class = "header">
+                <h2>Activity</h2> 
+                    <table class = "table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Completed</th>
+                            </tr>
+                        </thead>
+                        {% for routes in all_routes %}
+                            {% if routes.users_id == session.id %} 
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a class="brand text-decoration-none font-weight-bold text-dark"  href="/route/{{ routes.id }}">{{ routes.name }}</a>
+                                        </td>
+                                        {% if routes.completed ==1 %}
+                                            <td>Yes</td>
+                                        {% else %}
+                                            <td>No</td>
+                                        {% endif %}
+                                    </tr>
+                                </tbody>
+                            {% endif %}    
+                    {% endfor %}
+                            </table>    
+                    <h2>Create a Running Route</h2>
+                </div>
+                <div class = "create_route">
+                    <input type = "text" id = "start", placeholder="Start">
+                    <input type = "text" id = "end", placeholder="End">
+                    <p id ="distance"></p>
+                </div>
+        </div>
+        <br>
+        <div class = "row">
+            <div class = "col-sm">
+                <div id = "map"></div>
+                <div id="sidebar"></div>
+            </div>       
+            <div class = "col-sm">
+                <form action = "/route/create" method="post">
+                    <div class="header">
+                        <h2>Add New Route</h2>
+                    </div>
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type = "text" name = "name" id = "name" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                        {% for error in get_flashed_messages(category_filter = ["name"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="distance">Distance:</label>
+                        <input type = "text" name = "distance" id = "distance" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                            {% for error in get_flashed_messages(category_filter = ["distance"]) %}
+                            <p class = "alert alert-danger">{{  error  }}</p>
+                            {% endfor %}
+                    </div>
+                    <div>
+                        <input id = "path" name = "path" type = "hidden" value= "">
+                    </div>
+                    <div>
+                        <input type = "submit" value = "Add Route" class = "btn-primary">
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=[API KEY]&callback=initMap&v=weekly" async></script>
+</body>
+</html>
+
+

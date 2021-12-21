@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <title>View Profile</title>
+</head>
+<body>
+    <div class = "container p-2">
+        <nav class="h2 navbar navbar-dark bg-dark p-2 space-between">
+            <a class="brand text-decoration-none text-light space-between" href="/dashboard">
+                Right Route
+            </a>
+            <a class="view_profile text-decoration-none text-light" href="/view_profile/{{ user.id }}">
+                {{ user.first_name }}'s Profile
+            </a>
+            <a class="logout text-decoration-none text-light" href="/logout">
+                Logout
+            </a>
+        </nav>
+        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+            <div class="card p-4">
+                <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+                    <button class="btn btn-secondary"> <img src="https://www.microsoft.com/en-us/research/wp-content/themes/microsoft-research-theme/images/blank-avatar.png" height="100" width="100" /></button> 
+                    <span class="name mt-3">{{ user.first_name }} {{ user.last_name }}</span> 
+                    <span class="email">{{ user.email }}</span>
+                    <span class="height">{{ user.height }} in</span>
+                    <span class="weight">{{ user.weight }} lbs</span>
+                    <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
+                        <span class="completed">
+                            Completed Routes: {{ total_completed }}
+                        </span> 
+                    </div>
+                    <div class=" d-flex mt-2"> 
+                        <a class = "btn btn-dark text-decoration-none" href = "/edit_profile/{{ user.id }}">
+                            Edit Profile
+                        </a>
+                    </div>
+                    <div class=" px-2 rounded mt-4 date "> 
+                        <span class="join">Member Since {{ user.created_at.strftime('%m-%d-%y') }}</span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

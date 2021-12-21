@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <title>View Run</title>
+</head>
+<body>
+    <div class = "container text-center space-between">
+        <nav class="h2 navbar navbar-dark bg-dark p-2">
+            <a class="brand text-decoration-none text-light" href="/dashboard">
+                Right Route
+            </a>
+            <a class="view_profile text-decoration-none text-light" href="/view_profile/{{ user.id }}">
+                {{ user.first_name }}'s Profile
+            </a>
+            <a class="logout text-decoration-none text-light" href="/logout">
+                Logout
+            </a>
+        </nav>
+        <form action="/route/completed" method="post">
+            <input type = "hidden" name = "id" value = {{ this_route.id }}>
+            <div class = "align-content-center card p-5">
+                <h3>{{ this_route.name }} </h3>
+                <br>
+                <h3>{{ this_route.distance }} mile(s)</h3>
+                <br>
+                <div>
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?size=350x350&path=enc:{{ this_route.path }}&key=AIzaSyDVf9rj590ndnYB807vGhaKvtQ9p-2Y7bc" alt="">
+                </div>
+                <br>
+                <div>
+                    <input type = "submit" name = "completed" value = "Complete Run" onclick= "hide(this)" class = "btn-light">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

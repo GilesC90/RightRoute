@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <title>Welcome</title>
+</head>
+<body>
+    <div class = "container text-center p-5" style = "width: auto;">
+        <nav class="h2 navbar navbar-dark bg-dark p-2">
+            <a class="brand text-decoration-none text-light space-between" href="/dashboard">
+                Right Route
+            </a>
+        </nav>
+        <div class = "row">
+            <div class = "col">
+                <h2 class = "text-dark">Register</h2>
+                <form action = "/register" class = "bg-dark text-light p-5 rounded" method="post">
+                    <label for = "first_name">First Name:</label>
+                    <input type = "text" name = "first_name" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["first_name"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <label for = "last_name">Last Name:</label>
+                    <input type = "text" name = "last_name" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["last_name"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <label for = "email">Email Address:</label>
+                    <input type = "email" name = "email" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["email"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <label for = "location">Location:</label>
+                    <input type = "text" name = "location" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["location"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <label for = "height">Height (inches):</label>
+                    <input type = "number" name = "height" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["height"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <label for = "weight">Weight (lbs):</label>
+                    <input type = "number" name = "weight" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["weight"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <label for = "password">Password:</label>
+                    <input type = "password" name = "password" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["password"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <label for = "password_confirmation">Confirm Password:</label>
+                    <input type = "password" name = "password_confirmation" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["password_confirmation"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <input class = "btn btn-light" type = "submit" value = "Submit">
+                </form>
+            </div>
+            <div class = "col">
+                <h2 class = "text-dark">Login</h2>
+                <form action = "/login" class = "bg-dark text-light p-5 rounded" method="post">
+                    <label for = "login_email">Email:</label>
+                    <input type = "text" name = "login_email" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    <label for = "login_password">Password:</label>
+                    <input type = "password" name = "login_password" class = "text-center form-control custom-select custom-select-sm form-control mb-3">
+                    {% for error in get_flashed_messages(category_filter = ["login"]) %}
+                        <p class = "alert alert-danger">{{  error  }}</p>
+                    {% endfor %}
+                    <input class = "btn btn-light" type = "submit" value = "Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
